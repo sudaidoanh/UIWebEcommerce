@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Laptop</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/6e82d44b88.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+    <script>
+        logout = () => {};
+        addItem = (id) => {};
+    </script>
+
+    <script type="module">
+        var count = 0;
+        if(window.sessionStorage.getItem("name") != null) {
+            document.getElementById("login").style.display="none";
+            document.getElementById("register").style.display="none";
+            document.getElementById("user").innerHTML = `
+                <li class="nav-item">
+                    <div class=" dropdown">
+                        <a class="nav-link" href="" id="navbardrop" data-toggle="dropdown"> ${sessionStorage.getItem("name")} &nbsp;
+                        <i class="fa fa-align-justify"></i></a>
+                        <div class="dropdown-menu">
+                            <a href="/" class="dropdown-item">Thông tin cá nhân</a>
+                            <a href="/" class="dropdown-item">Đổi mật khẩu</a>
+                            <button type="button" onclick="logout()" class="dropdown-item">Đăng xuất</button>
+                        </div>
+                </div>'`;
+
+        } else {
+            document.getElementById("login").style.display="block";
+            document.getElementById("register").style.display="block";
+        }
+
+        for(var i = 0; i < product_list.length; i++) {
+            if(sessionStorage.getItem(`${i}`) != null) {
+                count++;
+            } 
+        }
+        document.getElementById("countItem").innerHTML = count;
+
+        logout = () => {
+            sessionStorage.removeItem("mail");
+            sessionStorage.removeItem("name");
+            sessionStorage.removeItem("phone");
+            location.reload();
+        }
+
+        addItem = (id) => {
+            if(window.sessionStorage.getItem(`${id}`) != null) {
+                let i = parseInt(sessionStorage.getItem(`${id}`)) + 1;
+                sessionStorage.setItem(`${id}`, i);
+                alert("Đã thêm số lượng sản phẩm vào giỏ hàng");
+                location.reload();
+            } else{
+                window.sessionStorage.setItem(`${id}`, "1");
+                alert("Đã thêm vào giỏ hàng");
+                location.reload();
+            }
+        }
+        
+    </script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0" nonce="ZmE7ruAc"></script>
+
+
+    <!-- Header/Nav -->
+    <header class="bg-dark" id="1">
+        <nav class="navbar navbar-expand-sm justify-content-center">
+            <div class="container">
+                <a class="navbar-brand text-light" href="/">
+                    <h2>Ultimate <em>Laptop</em></h2>
+                </a>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link text-light" href="/">Trang chủ
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="products.html">Sản phẩm</a>
+                    </li>
+
+                    <!-- <li class="nav-item">
+                        <a class="nav-link text-light" href="about.html">Về chúng tôi</a>
+                    </li> -->
+
+
+                    <li id="login" class="nav-item">
+                        <a class="nav-link text-light" href="login.html">Đăng nhập
+                            <i class="fa fa-user"></i>
+                        </a>
+                    </li>
+
+                    <div id="user"></div>
+
+                    <li id="register" class="nav-item">
+                        <a class="nav-link text-light" href="register.html">Đăng ký
+                        </a>
+                    </li>
+
+                    
+                    <li id="cart" class="nav-item">
+                        <a class="nav-link text-light" href="cart.html"><span id="countItem" class=" badge badge-light">0</span> Giỏ hàng
+                            <i class="fa fa-cart-arrow-down"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Dropdown menu -->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <div class="nav-item dropdown">
+                    <a class="nav-link text-light" href="" id="navbardrop" data-toggle="dropdown">Danh mục sản phẩm
+                        &nbsp;
+                        <i class="fa fa-align-justify"></i></a>
+                    <div id="menu" class="dropdown-menu">
+                        
+                    </div>
+
+                </div>
+
+                <div class="col-md-4 col-xs-4 col-sm-4 col-lg-4 ">
+                    <marquee behavior="" direction="Left">Bring you the best choice </marquee>
+                </div>
+
+                <form action="products" class="form-inline">
+                    <input type="text" name="txtSearch" placeholder="Tìm kiếm" class="form-control mr-lg-2">
+                    <button class="btn btn-success" type="submit" value="search">Search</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <section class="banner header-text">
+        <div id="myCarousel" class="carousel slide">
+            <ul class="carousel-indicators">
+                <li class="item1 active"></li>
+                <li class="item2"></li>
+                <li class="item3"></li>
+            </ul>
+
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="./img/slide_01.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/slide_02.jpg" alt="">
+                </div>
+                <div class="carousel-item">
+                    <img src="./img/slide_03.jpg" alt="">
+                </div>
+            </div>
+
+            <a class="carousel-control-prev" href="#1">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#1">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+        
+        <div class="text-content">
+            <h4>Best Offer</h4>
+            <h2>New Arrivals On Sale</h2>
+        </div>
+
+    </section>
+
+    <!-- Main -->
+    <main>
+        <!-- First section -->
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2 style="text-transform: uppercase; border-radius: 5px; background-color: aquamarine; padding: 5px; color: red;">Sản phẩm nổi bật</h2>
+                        <a href="products">Tất cả sản phẩm &nbsp;<i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+
+            </div>  
+
+            <div class="row" id="highlightItem">
+
+            </div>
+        </section>
+
+
+        <!-- 2nd Section -->
+
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2 style="text-transform: uppercase;">Sản phẩm khác</h2>
+                        <a href="products">Tất cả sản phẩm &nbsp;<i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="row" id="mainPageItem"></div>
+        </section>
+
+    </main>
+
+    <section class="best-features">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Laptop chất lượng với <b>Utimate Laptop</b></h2>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="left-content">
+                        <h4>Bạn đang tìm kiếm 1 chiếc laptop chất lượng phù hợp với nhu cầu sử dụng?</h4>
+                        <h6><b>Địa chỉ:</b> 69/68 Đ. Đặng Thuỳ Trâm, Phường 13, Bình Thạnh, Thành phố Hồ Chí Minh</h6>
+                        <h6><b>Email:</b> <a href="mailto:ultimate-laptop@gmail.com" class="fa fa-mail-forward"> &nbsp; ultimate-laptop@gmail.com</a> </h6>
+                        <h6><b>Hotline:</b> 190019xx </h6>
+
+                        <a href="" class="filled-button">Về chúng tôi</a>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="middle-content">
+                        <h3>Hệ thống tổng đài miễn phí: <p>(Làm việc từ 9h-18h)</p></h3>
+                        <p>- Gọi mua hàng: <b>1900100x</b></p>
+                        <p>- Chăm sóc khách hàng: <b>1900190x</b></p>
+                        <ul class="featured-list">
+                            <li><a href="#">Chính sách bảo hành</a></li>
+                            <li><a href="#">Chính sách vận chuyển</a></li>
+                            <li><a href="#">Chính sách thanh toán</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fb-page" data-href="https://www.facebook.com/truongdaihocvanlang" 
+                        data-tabs="timeline" data-width="" 
+                        data-height="300px" 
+                        data-small-header="false" 
+                        data-adapt-container-width="true" 
+                        data-hide-cover="false" 
+                        data-show-facepile="true">
+                        <blockquote   blockquote cite="https://www.facebook.com/truongdaihocvanlang" 
+                            class="fb-xfbml-parse-ignore">
+                            <a href="https://www.facebook.com/truongdaihocvanlang">Van Lang University</a>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <section class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-content">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="./img/dathongbaobocongthuong.png" height="100px" width="310" alt="">
+                            </div>
+                            <div class="col-md-4">
+                                <iframe width="504" height="283" src="https://www.youtube.com/embed/J2X5mJ3HDYE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#1" class="filled-button">Về đầu trang
+                                    <i class="fa fa-chevron-circle-up"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="inner-content">
+                        <p>Copyright &copy; 2023 Ultimate Laptop Co., Ltd.
+                            - Design: <a rel="nofollow noopener" href="" target="_blank">WebCanBan</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            loadHighlightProducts();
+            loadMainPageProducts();
+            loadMenu();
+        }
+    </script>
+
+    <script src="./js/banner.js"></script>
+    <script src="./js/products.js"></script>
+</body>
+</html>
